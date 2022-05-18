@@ -39,9 +39,9 @@ def write_image(directory, num, img_idx, sample):
     image.save_img(os.path.join(directory, "{}_{}.pgm".format(img_idx, num)), sample)
 
 def save_samples(per_number, directory, use_set='test'):
-    class_num = 3
+    class_num = 2
 
-    data = np.load('./imageData.npz')
+    data = np.load('./data.npz')
     (x_train, y_train, x_test, y_test) = (data['x_train'], data['y_train'], data['x_test'], data['y_test'])
     # use_set 决定(x,y)是训练集还是测试集
     (x, y) = (x_train, y_train) if use_set == 'train' else (x_test, y_test)

@@ -44,6 +44,7 @@ L2_MEM unsigned char *Img_In;
 //#define PRINT_IMAGE
 
 char *ImageName = NULL;
+#define CLASS_NUM 2
 
 //short int *class_num = NULL;
 
@@ -61,7 +62,7 @@ static void cluster()
   //Checki Results
   int rec_digit = 0;
   short int highest = ResOut[0];
-  for(int i = 0; i < 3; i++) {
+  for(int i = 0; i < CLASS_NUM; i++) {
     printf("class %d: %d \n", i, ResOut[i]);
     if(ResOut[i] > highest) {
       highest = ResOut[i];
@@ -107,10 +108,10 @@ int test_model(void)
     }
 #endif  /* PRINT_IMAGE */
 
-    ResOut = (short int *) AT_L2_ALLOC(0, 3 * sizeof(short int));
+    ResOut = (short int *) AT_L2_ALLOC(0, CLASS_NUM * sizeof(short int));
     if (ResOut == NULL)
     {
-        printf("Failed to allocate Memory for Result (%d bytes)\n", 3 *sizeof(short int));
+        printf("Failed to allocate Memory for Result (%d bytes)\n", CLASS_NUM *sizeof(short int));
         pmsis_exit(-3);
     }
 
@@ -162,7 +163,7 @@ int test_model(void)
     pi_cluster_close(&cluster_dev);
 
     AT_L2_FREE(0, Img_In, AT_INPUT_SIZE_BYTES);
-    AT_L2_FREE(0, ResOut, 3 * sizeof(short int));
+    AT_L2_FREE(0, ResOut, CLASS_NUM * sizeof(short int));
     printf("Ended\n");
 
     pmsis_exit(0);

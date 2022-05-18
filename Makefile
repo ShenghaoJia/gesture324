@@ -11,7 +11,7 @@ endif
 include common.mk
 
 LOAD_QUANTIZATION= #-q #to load a tflite quantized model
-IMAGE=$(CURDIR)/samples/ripe.pgm
+IMAGE=$(CURDIR)/samples/img_gray_30_1.ppm
 
 io=host
 
